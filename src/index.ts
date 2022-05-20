@@ -4,7 +4,7 @@ const registerStorageService = (service: any) => {
   _storageServices[service.name] = service.meta
 }
 
-const getStorageService = (serviceNames?: string[]) => {
+const getStorageServices = (serviceNames?: string[]) => {
   if (!serviceNames || serviceNames.length === 0) {
     return _storageServices
   }
@@ -30,6 +30,9 @@ const load = async (service: string, uri: string) => {
   const source = await _storageServices[service].loadFunc(uri)
   return source
 }
+export const getStorageService = (name: string) => {
+  return _storageServices[name]
+}
 
-export { store, load, getStorageService, registerStorageService }
+export { store, load, getStorageServices, registerStorageService }
 export default _storageServices
