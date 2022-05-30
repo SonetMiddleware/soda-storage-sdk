@@ -23,6 +23,7 @@ const getUrl = (uri: string, config?: any): string => {
   if (source.startsWith('ipfs://')) {
     source = source.substring(7)
   }
+  // FIXME: optimize of well known source
   if (config && config.source == 'opensea') {
     source = `https://opensea.mypinata.cloud/ipfs/${source}`
   } else if (source.indexOf('/') >= 0) {
