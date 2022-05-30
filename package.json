@@ -17,8 +17,12 @@
   },
   "author": "EuclidTwin",
   "license": "ISC",
-  "dependencies": {},
+  "dependencies": {
+    "@babel/runtime": "^7.17.9",
+    "ipfs-http-client": "^52.0.0"
+  },
   "devDependencies": {
+    "ipfs-core-types": "^0.10.3",
     "eslint": "^7.7.0",
     "father-build": "^1.21.2",
     "husky": "^4.3.8",
