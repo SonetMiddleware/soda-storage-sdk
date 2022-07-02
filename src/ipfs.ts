@@ -52,7 +52,7 @@ const load = async (source: string, config?: any) => {
     try {
       // FIXME: hard code for now, to get "image" from json source
       s = await (await (await fetch(src)).blob()).text()
-      s = JSON.parse(src).image
+      s = JSON.parse(s).image
     } catch (e) {
       s = src
     }
