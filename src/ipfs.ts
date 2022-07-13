@@ -1,3 +1,4 @@
+import { CID } from 'ipfs-http-client'
 import { Function, registerStorageService } from './storage'
 import { ipfsAdd, ipfsGet } from './utils/ipfsHandler'
 
@@ -29,7 +30,8 @@ const getUrl = (uri: string, config?: any): string => {
   } else if (source.indexOf('/') >= 0) {
     source = `https://ipfs.io/ipfs/${source}`
   } else {
-    source = `https://${source}.ipfs.dweb.link/`
+    const cidv1 = CID.parse(source).toV1().toString()
+    source = `https://${cidv1}.ipfs.dweb.link/`
   }
   return source
 }
