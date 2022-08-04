@@ -51,15 +51,27 @@ const load = async (source: string, config?: any) => {
   if (config && config.uri) {
     const src = getUrl(hash, config)
     let s: string
+    const extra = []
     try {
-      // FIXME: hard code for now, to get "image" from json source
+      // FIXME: hard code for now, to get "image" from json source, for opensea NFT protocol
       s = await (await (await fetch(src, { mode: 'cors' })).blob()).text()
-      s = JSON.parse(s).image
+      const json = JSON.parse(s)
+      s = json.image
+      if (json.presentation) {
+        for (const k of Object.keys(json.presentation)) {
+          extra[k] = {
+            origin: json.presentation[k],
+            uri: getUrl(json.presentation[k], config)
+          }
+        }
+      }
     } catch (e) {
       s = src
     }
     const uri = getUrl(s, config)
-    return uri
+    const res = { uri, origin: s, extra }
+    console.debug('[soda-storage-ipfs] load resource with uri: ', res)
+    return res
   } else {
     if (hash.startsWith('http://') || hash.startsWith('https://')) {
       return await (await fetch(hash)).blob()
