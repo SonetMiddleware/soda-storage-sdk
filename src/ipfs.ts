@@ -57,6 +57,10 @@ const load = async (source: string, config?: any) => {
       s = await (await (await fetch(src, { mode: 'cors' })).blob()).text()
       const json = JSON.parse(s)
       s = json.image
+      if (!s && json.animation_url) {
+        // FIXME: hardcode for now
+        extra['animation'] = { origin: json.animation_url }
+      }
       if (json.presentation) {
         for (const k of Object.keys(json.presentation)) {
           extra[k] = {
