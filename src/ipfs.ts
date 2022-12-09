@@ -26,7 +26,8 @@ const getUrl = (uri: string, config?: any): string => {
   }
   // FIXME: optimize of well known source
   if (config && config.source == 'opensea') {
-    source = `https://opensea.mypinata.cloud/ipfs/${source}`
+    // source = `https://opensea.mypinata.cloud/ipfs/${source}`
+    source = `https://ipfs.io/ipfs/${source}`
   } else if (source.indexOf('/') >= 0) {
     source = `https://ipfs.io/ipfs/${source}`
   } else {
